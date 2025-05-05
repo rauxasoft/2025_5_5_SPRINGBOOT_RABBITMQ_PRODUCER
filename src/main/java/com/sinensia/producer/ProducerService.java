@@ -20,7 +20,11 @@ public class ProducerService {
 	}
 	
 	public void enviarMensaje(String mensaje) {
-		rabbitTemplate.convertAndSend(exchange, routingKey, mensaje);
+		
+		Producto producto = new Producto(System.currentTimeMillis(), mensaje, Math.round(Math.random()));
+		
+		rabbitTemplate.convertAndSend(exchange, routingKey, producto);
+		
 		System.out.println("Mensaje enviado: " + mensaje);
 	}
 	
